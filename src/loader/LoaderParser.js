@@ -13,7 +13,7 @@ Phaser.LoaderParser = {
 
     /**
     * Alias for xmlBitmapFont, for backwards compatibility.
-    * 
+    *
     * @method Phaser.LoaderParser.bitmapFont
     * @param {object} xml - XML data you want to parse.
     * @param {PIXI.BaseTexture} baseTexture - The BaseTexture this font uses.
@@ -94,39 +94,39 @@ Phaser.LoaderParser = {
     jsonBitmapFont: function (json, baseTexture, xSpacing, ySpacing) {
 
         var data = {
-            font: json.font.info._face,
-            size: parseInt(json.font.info._size, 10),
-            lineHeight: parseInt(json.font.common._lineHeight, 10) + ySpacing,
+            font: json.info.face,
+            size: parseInt(json.info.size, 10),
+            lineHeight: parseInt(json.common.lineHeight, 10) + ySpacing,
             chars: {}
         };
 
-        json.font.chars["char"].forEach(
+        json.chars.forEach(
 
             function parseChar(letter) {
 
-                var charCode = parseInt(letter._id, 10);
+                var charCode = parseInt(letter.id, 10);
 
                 data.chars[charCode] = {
-                    x: parseInt(letter._x, 10),
-                    y: parseInt(letter._y, 10),
-                    width: parseInt(letter._width, 10),
-                    height: parseInt(letter._height, 10),
-                    xOffset: parseInt(letter._xoffset, 10),
-                    yOffset: parseInt(letter._yoffset, 10),
-                    xAdvance: parseInt(letter._xadvance, 10) + xSpacing,
+                    x: parseInt(letter.x, 10),
+                    y: parseInt(letter.y, 10),
+                    width: parseInt(letter.width, 10),
+                    height: parseInt(letter.height, 10),
+                    xOffset: parseInt(letter.xoffset, 10),
+                    yOffset: parseInt(letter.yoffset, 10),
+                    xAdvance: parseInt(letter.xadvance, 10) + xSpacing,
                     kerning: {}
                 };
             }
 
         );
 
-        if (json.font.kernings && json.font.kernings.kerning) {
+        if (json.kernings && json.kernings.kerning) {
 
-            json.font.kernings.kerning.forEach(
+            json.kernings.kerning.forEach(
 
                 function parseKerning(kerning) {
 
-                    data.chars[kerning._second].kerning[kerning._first] = parseInt(kerning._amount, 10);
+                    data.chars[kerning.second].kerning[kerning.first] = parseInt(kerning.amount, 10);
 
                 }
 
