@@ -79,7 +79,7 @@ Phaser.Tween = function (target, game, manager) {
     /**
     * The onLoop event is fired if the Tween, or any child tweens loop.
     * It will be sent 2 parameters: the target object and this tween.
-    * 
+    *
     * @property {Phaser.Signal} onLoop
     */
     this.onLoop = new Phaser.Signal();
@@ -712,6 +712,17 @@ Phaser.Tween.prototype = {
             this.resume();
         }
 
+    },
+
+    /**
+    * Resets the tween to start from the beginning
+	* Experimental and only tested on trivial tweens
+    *
+    * @method Phaser.Tween#reset
+    */
+    reset: function () {
+        this.current = 0;
+        this.timeline[this.current].start();
     },
 
     /**
