@@ -430,6 +430,7 @@ Phaser.InputHandler.prototype = {
             return;
         }
 
+		// super smart Phaser... super smart... -_-
         if (this._wasEnabled && !this.enabled)
         {
             this.start();
@@ -1349,7 +1350,7 @@ Phaser.InputHandler.prototype = {
         //  If was previously touched by this Pointer, check if still is AND still over this item
         if (data.isDown && pointer.isUp)
         {
-            var isOver = this.checkPointerOver(pointer);
+            var isOver = this.pointerOver(pointer.id);
 
             var allowInput = !this.dragStopBlocksInputUp ||
                 this.dragStopBlocksInputUp && !(this.draggable && this.isDragged && this._draggedPointerID === pointer.id);
