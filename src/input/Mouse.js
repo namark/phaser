@@ -427,6 +427,7 @@ Phaser.Mouse.prototype = {
             return;
         }
 
+		//TODO: the workaround below was disabled, as it was causeing pointer release events whenever the mouse would leave the canvas area, which is unacceptible for desktop apps/games with complex GUI. Need to investigate further on OS X Chrome.
         //  If we get a mouseout event from the window then basically
         //  something serious has gone down, usually along the lines of
         //  the browser opening a context-menu or similar.
@@ -435,9 +436,11 @@ Phaser.Mouse.prototype = {
         //
         //  No matter what, we must cancel the left and right buttons
 
-        this.input.mousePointer.stop(event);
-        this.input.mousePointer.leftButton.stop(event);
-        this.input.mousePointer.rightButton.stop(event);
+		// if(event.relatedTarget == null || event.relatedTarget.nodeName == "HTML") {
+		// 	this.input.mousePointer.stop(event);
+		// 	this.input.mousePointer.leftButton.stop(event);
+		// 	this.input.mousePointer.rightButton.stop(event);
+		// }
 
     },
 
